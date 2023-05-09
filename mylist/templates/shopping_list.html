@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: 'Shadows Into Light', cursive;
+            background-color: rgb(2,49,60);
+            margin: 0;
+
+        }
+        header {
+            background-color: rgb(255,165,0);
+            display: flex;
+            #padding-bottom: -300px;
+            padding-left: 150px;
+            box-shadow: 0 20px 100px rgb(255,165,0);
+            color: rgb(2,57,60);
+        }
+        button {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: rgb(255,165,0);
+            box-shadow: black 14px 20px 20px;
+            font-size: 32px;
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+        }
+        .list-item {
+            background-color: white;
+            height: 50px;
+            box-shadow:black 4px 4px 4px;
+            padding-left: 40px;
+            display:flex;
+            align-items:center;
+            border-top: 1px solid rgb(0,0,0,0.1);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Best Shopping List</h1>
+    </header>
+
+        <button onclick="addItem()">
+            +
+            </button>
+
+   <div class="list-item">
+           <input type="checkbox"> Element1
+       </div>
+
+    <div class="list-item">
+        <input type="checkbox"> Element2
+        </div>
+
+
+    <script>
+        function addItem() {
+            let itemName = prompt('Neues Produkt hinufügen')
+            let token = '{{ csrf_token }}';
+            let formData = new FormData();
+            formData.append('itemName', itemName);
+            formData.append('csrfmiddlewaretoken', token);
+            fetch('/mylist/', {
+                method: 'POST',
+                body: formData
+            });
+        }
+    </script>
+
+</body>
+</html>
